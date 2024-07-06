@@ -1,0 +1,14 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  background-image: url("https://img.freepik.com/free-photo/supermarket-banner-concept-with-ingredients_23-2149421158.jpg?t=st=1720288338~exp=1720291938~hmac=e6c98c3e116acf219932429ddb5dd6153c59e83d0362fac174c940cae0959464&w=1380");
+  background-size: cover;
+  
+  height: 100%;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
