@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { IMealState } from '../../types.ts';
 import axiosApi from '../../axiosApi.ts';
 import Meals from '../../components/Meals/Meals.tsx';
-import meals from '../../components/Meals/Meals.tsx';
 
 const HomeContainer = () => {
   const [allMeals, setAllMeals] = useState<IMealState[]>([]);
