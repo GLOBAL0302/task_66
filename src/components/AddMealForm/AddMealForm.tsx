@@ -1,5 +1,7 @@
 import {
-  Box, Button,
+  Box,
+  Button,
+  CircularProgress,
   FormControl,
   InputLabel,
   MenuItem,
@@ -15,67 +17,69 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const AddMealForm = () => {
   const navigate = useNavigate();
-  const {id}= useParams();
+  const { id } = useParams();
   const [userMeal, setUserMeal] = useState<IMealInput>({
-    mealTime:"",
-    mealDescription:"",
-    mealCalories:""
-  })
+    mealTime: '',
+    mealDescription: '',
+    mealCalories: '',
+  });
 
-  const fetchMealData = useCallback(async ()=>{
-      if(id){
-        const {data:existMealPlan} = await axiosApi.get(`/meals/${id}.json`);
-        setUserMeal(existMealPlan);
-      }
-  },[id])
+  const [isLoading, setIsLoading] = useState(false);
 
+  const fetchMealData = useCallback(async () => {
+    if (id) {
+      const { data: existMealPlan } = await axiosApi.get(`/meals/${id}.json`);
+      setUserMeal(existMealPlan);
+    }
+  }, [id]);
 
   useEffect(() => {
     void fetchMealData();
   }, [fetchMealData]);
 
-
-  const onFieldChange = (event:React.ChangeEvent<HTMLInputElement>)=>{
-    const {name, value} = event.target
-    setUserMeal((prevState)=>(
-      {
-        ...prevState,
-        [name]:value
-      }))
-  }
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setUserMeal((prevState)=>({
+  const onFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setUserMeal((prevState) => ({
       ...prevState,
-      mealTime:event.target.value as string
-    }))
+      [name]: value,
+    }));
   };
 
-  const onFormSubmit = async (event:React.FormEvent)=>{
+  const handleChange = (event: SelectChangeEvent) => {
+    setUserMeal((prevState) => ({
+      ...prevState,
+      mealTime: event.target.value as string,
+    }));
+  };
+
+  const onFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    try{
-      if(id){
-        await axiosApi.put(`/meals/${id}.json`, userMeal)
-      }else{
-        await axiosApi.post("/meals.json", userMeal);
+    setIsLoading(true);
+    try {
+      if (id) {
+        await axiosApi.put(`/meals/${id}.json`, userMeal);
+      } else {
+        await axiosApi.post('/meals.json', userMeal);
       }
-    }finally {
-      navigate("/")
+    } finally {
+      setIsLoading(false);
+      navigate('/');
     }
-  }
+  };
 
   return (
-    <div style={{background:'white'}}>
+    <div style={{ background: 'white' }}>
       <Box padding={5}>
         <Typography variant="h3" component="p">
-          {id?"Edit Meal": "Add Meal"}
+          {id ? 'Edit Meal' : 'Add Meal'}
         </Typography>
-        <hr/>
-        <Box component={"form"}
-             sx={{display:"flex" , flexDirection:"column", gap:5}}
-             onSubmit={onFormSubmit}>
-          <FormControl
-            fullWidth sx={{marginTop:5 , gap:"20px"}}>
+        <hr />
+        <Box
+          component={'form'}
+          sx={{ display: 'flex', flexDirection: 'column', gap: 5 }}
+          onSubmit={onFormSubmit}
+        >
+          <FormControl fullWidth sx={{ marginTop: 5, gap: '20px' }}>
             <InputLabel id="demo-simple-select-label">Meal Time</InputLabel>
             <Select
               labelId="demo-simple-select-label"
@@ -90,30 +94,36 @@ const AddMealForm = () => {
               <MenuItem value="dinner">Dinner</MenuItem>
             </Select>
           </FormControl>
-            <TextField
-              name="mealDescription"
-              required
-              fullWidth
-              label="Meal Description"
-              type="text"
-              variant="outlined"
-              value={userMeal.mealDescription}
-              onChange={onFieldChange}/>
-            <TextField
-              name="mealCalories"
-              required
-              fullWidth
-              label="Meal Calories"
-              type="number"
-              variant="outlined"
-              value={userMeal.mealCalories}
-              onChange={onFieldChange}/>
-            <Button
-              style={{width:"200px"}}
-              type="submit" variant="contained"
-              color={id?"success":"primary"}>
-              {id? "Save Edit":"Create"}
-            </Button>
+          <TextField
+            name="mealDescription"
+            required
+            fullWidth
+            label="Meal Description"
+            type="text"
+            variant="outlined"
+            value={userMeal.mealDescription}
+            onChange={onFieldChange}
+          />
+          <TextField
+            name="mealCalories"
+            required
+            fullWidth
+            label="Meal Calories"
+            type="number"
+            variant="outlined"
+            value={userMeal.mealCalories}
+            onChange={onFieldChange}
+          />
+          <Button
+            disabled={isLoading}
+            style={{ width: '200px' }}
+            type="submit"
+            variant="contained"
+            color={id ? 'success' : 'primary'}
+          >
+            {id ? 'Save Edit' : 'Create'}
+            {isLoading ? <CircularProgress color="success" /> : ''}
+          </Button>
         </Box>
       </Box>
     </div>

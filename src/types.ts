@@ -1,9 +1,9 @@
 export interface IMealInput {
-  mealTime:string,
-  mealDescription:string,
-  mealCalories:string
+  mealTime: string;
+  mealDescription: string;
+  mealCalories: string;
 }
 
-export interface IMealState extends IMealInput{
-  id:string
+export interface IMealState extends IMealInput {
+  id: string;
 }
