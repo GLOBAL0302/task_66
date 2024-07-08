@@ -9,7 +9,6 @@ const HomeContainer = () => {
 
   const fetchMealData = useCallback(async () => {
     const response = await axiosApi.get('/meals.json');
-    console.log(response);
 
     const responseData = response.data;
     if (responseData !== null) {
@@ -28,6 +27,15 @@ const HomeContainer = () => {
     void fetchMealData();
   }, [fetchMealData]);
 
+
+  const deleteMealFunc = async (meal:IMealState)=>{
+    if(confirm("Are you sure you want to delete this meal plan")){
+      await axiosApi.delete(`/meals/${meal.id}.json`);
+      await fetchMealData();
+    }
+
+  }
+
   return (
     <div style={{ background: 'white' }}>
       <Box padding={5}>
@@ -35,7 +43,7 @@ const HomeContainer = () => {
           Home
         </Typography>
         <hr />
-        <Meals meals={allMeals}/>
+        <Meals meals={allMeals} deleteMealFunc={deleteMealFunc}/>
       </Box>
     </div>
   );

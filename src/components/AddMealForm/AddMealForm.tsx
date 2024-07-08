@@ -8,18 +8,29 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { IMealInput } from '../../types.ts';
 import axiosApi from '../../axiosApi.ts';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const AddMealForm = () => {
   const navigate = useNavigate();
+  const {id}= useParams();
   const [userMeal, setUserMeal] = useState<IMealInput>({
     mealTime:"",
     mealDescription:"",
     mealCalories:""
   })
+
+  const fetchMealData = useCallback(async ()=>{
+      console.log(id)
+  },[id])
+
+
+  useEffect(() => {
+    void fetchMealData();
+  }, [fetchMealData]);
+
 
   const onFieldChange = (event:React.ChangeEvent<HTMLInputElement>)=>{
     const {name, value} = event.target
@@ -35,7 +46,6 @@ const AddMealForm = () => {
       ...prevState,
       mealTime:event.target.value as string
     }))
-
   };
 
   const onFormSubmit = async (event:React.FormEvent)=>{
