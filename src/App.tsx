@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 import AddMealForm from './components/AddMealForm/AddMealForm.tsx';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage.tsx';
 
+
 const App = () => {
   return (
     <>

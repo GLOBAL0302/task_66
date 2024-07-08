@@ -15,6 +15,9 @@ import { IMealInput } from '../../types.ts';
 import axiosApi from '../../axiosApi.ts';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import type { DatePickerProps } from 'antd';
+import { DatePicker, Space } from 'antd';
+
 const AddMealForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -22,6 +25,7 @@ const AddMealForm = () => {
     mealTime: '',
     mealDescription: '',
     mealCalories: '',
+    mealDate:""
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -65,6 +69,19 @@ const AddMealForm = () => {
       setIsLoading(false);
       navigate('/');
     }
+  };
+
+
+  const onChange: DatePickerProps['onChange'] = (date, dateString) => {
+
+    if(typeof dateString === 'string'){
+      setUserMeal((prevState)=>({
+        ...prevState,
+        mealDate:dateString
+      }))
+    }
+
+    console.log(userMeal)
   };
 
   return (
@@ -114,6 +131,9 @@ const AddMealForm = () => {
             value={userMeal.mealCalories}
             onChange={onFieldChange}
           />
+          <Space direction="vertical">
+            <DatePicker onChange={onChange} />
+          </Space>
           <Button
             disabled={isLoading}
             style={{ width: '200px' }}

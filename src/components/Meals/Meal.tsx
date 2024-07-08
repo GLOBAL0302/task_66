@@ -19,11 +19,13 @@ const Meal: React.FC<Props> = ({ meal, deleteMealFunc }) => {
   };
 
   return (
-    <Paper sx={{ padding: 1, marginBottom: 1, border: 2 }}>
-      <Typography variant="body1" component="p" sx={{ opacity: 0.5 }}>
+    <Paper
+      sx={{ padding: 1, marginBottom: 1, border: 1 }}>
+      <Typography variant="p" component="p" sx={{ opacity: 0.5 }}>
         {meal.mealTime}
       </Typography>
-      <Divider />
+      <Divider label="chip"><i>{meal.mealDate}</i></Divider>
+
       <Typography variant="h5" component="p">
         {meal.mealDescription}
       </Typography>

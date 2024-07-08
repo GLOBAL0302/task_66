@@ -10,7 +10,7 @@ interface Props {
 
 const Meals: React.FC<Props> = ({ meals, deleteMealFunc }) => {
   return (
-    <Box mt={1}>
+    <Box mt={1} style={{overflow:'scroll', height:"70vh"}}>
       {meals.map((meal) => (
         <Meal key={meal.id} meal={meal} deleteMealFunc={deleteMealFunc}></Meal>
       ))}

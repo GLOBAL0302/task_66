@@ -54,7 +54,8 @@ const HomeContainer = () => {
           </Typography>
           <LunchDining />
         </Box>
-        <Meals meals={allMeals} deleteMealFunc={deleteMealFunc} />
+        <Meals
+          meals={allMeals} deleteMealFunc={deleteMealFunc} />
       </Box>
     </div>
   );
