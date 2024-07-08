@@ -38,11 +38,16 @@ const HomeContainer = () => {
 
   return (
     <div style={{ background: 'white' }}>
-      <Box padding={5}>
-        <Typography variant='h3' component='p'>
+      <Box padding={2}>
+        <Typography variant='h4' component='h4'>
           Home
         </Typography>
         <hr />
+        <Typography
+          color={'green'}
+          textAlign={'right'} variant='p' component='p'>
+          <strong>Total calories: </strong>
+        </Typography>
         <Meals meals={allMeals} deleteMealFunc={deleteMealFunc}/>
       </Box>
     </div>

@@ -23,7 +23,10 @@ const AddMealForm = () => {
   })
 
   const fetchMealData = useCallback(async ()=>{
-      console.log(id)
+      if(id){
+        const {data:existMealPlan} = await axiosApi.get(`/meals/${id}.json`);
+        setUserMeal(existMealPlan);
+      }
   },[id])
 
 
@@ -51,7 +54,11 @@ const AddMealForm = () => {
   const onFormSubmit = async (event:React.FormEvent)=>{
     event.preventDefault();
     try{
-      await axiosApi.post("/meals.json", userMeal);
+      if(id){
+        await axiosApi.put(`/meals/${id}.json`, userMeal)
+      }else{
+        await axiosApi.post("/meals.json", userMeal);
+      }
     }finally {
       navigate("/")
     }
@@ -61,7 +68,7 @@ const AddMealForm = () => {
     <div style={{background:'white'}}>
       <Box padding={5}>
         <Typography variant="h3" component="p">
-          Add Meal
+          {id?"Edit Meal": "Add Meal"}
         </Typography>
         <hr/>
         <Box component={"form"}
@@ -78,6 +85,7 @@ const AddMealForm = () => {
               onChange={handleChange}
             >
               <MenuItem value="breakfast">Breakfast</MenuItem>
+              <MenuItem value="snack">Snack</MenuItem>
               <MenuItem value="lunch">Lunch</MenuItem>
               <MenuItem value="dinner">Dinner</MenuItem>
             </Select>
@@ -102,8 +110,9 @@ const AddMealForm = () => {
               onChange={onFieldChange}/>
             <Button
               style={{width:"200px"}}
-              type="submit" variant="contained" >
-              Submit
+              type="submit" variant="contained"
+              color={id?"success":"primary"}>
+              {id? "Save Edit":"Create"}
             </Button>
         </Box>
       </Box>

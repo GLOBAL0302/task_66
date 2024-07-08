@@ -1,25 +1,25 @@
 import React from 'react';
 import { IMealState } from '../../types.ts';
-import { Paper } from '@mui/material';
 import Meal from './Meal.tsx';
-import meal from './Meal.tsx';
+import { Box } from '@mui/material';
 
 
-interface Props{
-  meals:IMealState[]
-  deleteMealFunc:(meal:IMealState)=>void
+interface Props {
+  meals: IMealState[];
+  deleteMealFunc: (meal: IMealState) => void;
 }
-const Meals:React.FC<Props> = ({meals,deleteMealFunc}) => {
+
+const Meals: React.FC<Props> = ({ meals, deleteMealFunc }) => {
   return (
-    <>
-      {meals.map(meal=>(
+    <Box mt={1}>
+      {meals.map(meal => (
         <Meal
           key={meal.id}
           meal={meal}
-          deleteMealFunc = {deleteMealFunc}>
+          deleteMealFunc={deleteMealFunc}>
         </Meal>
       ))}
-    </>
+    </Box>
   );
 };
 

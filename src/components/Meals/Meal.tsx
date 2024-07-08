@@ -19,7 +19,8 @@ const Meal: React.FC<Props> = (
     >
       <Typography variant='body1' component='p' sx={{ opacity: 0.5 }}>{meal.mealTime}</Typography>
       <Divider />
-      <Typography mb={1} variant='h5' component='p'>{meal.mealDescription}</Typography>
+      <Typography variant='h5' component='p'>{meal.mealDescription}</Typography>
+      <Typography mb={2} textAlign={'right'} variant='p' component='p'><strong>calories:</strong> {meal.mealCalories}</Typography>
       <Box sx={{ display: 'flex' }} gap={2} justifyContent={'end'}>
         <Button
           onClick={()=>deleteMealFunc(meal)}
