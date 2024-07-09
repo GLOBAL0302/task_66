@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
-import { IMealState } from '../../types.ts';
+import {IMealState } from '../../types.ts';
 import axiosApi from '../../axiosApi.ts';
 import Meals from '../../components/Meals/Meals.tsx';
 import { LunchDining } from '@mui/icons-material';
@@ -14,7 +14,7 @@ const HomeContainer = () => {
     if (responseData !== null) {
       const newMealSet: IMealState[] = Object.keys(responseData).map((id) => ({
         id,
-        ...response.data[id],
+        ...responseData[id],
       }));
       setAllMeals(newMealSet);
     } else {

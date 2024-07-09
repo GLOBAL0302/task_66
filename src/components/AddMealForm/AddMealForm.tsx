@@ -14,7 +14,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { IMealInput } from '../../types.ts';
 import axiosApi from '../../axiosApi.ts';
 import { useNavigate, useParams } from 'react-router-dom';
-
 import type { DatePickerProps } from 'antd';
 import { DatePicker, Space } from 'antd';
 
@@ -67,7 +66,9 @@ const AddMealForm = () => {
       }
     } finally {
       setIsLoading(false);
-      navigate('/');
+      if (!id){
+        navigate('/');
+      }
     }
   };
 
