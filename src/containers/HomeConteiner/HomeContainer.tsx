@@ -50,7 +50,7 @@ const HomeContainer = () => {
         </Typography>
         <hr />
         <Box sx={{ display: 'flex', justifyContent: 'end' }}>
-          <Typography textAlign={'right'} variant="p" component="p">
+          <Typography textAlign={'right'} variant="subtitle1" component="p">
             <strong style={{ color: 'green' }}>Total calories</strong>:{' '}
             {totalCalories}
           </Typography>

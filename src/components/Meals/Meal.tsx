@@ -22,15 +22,15 @@ const Meal: React.FC<Props> = ({ meal, deleteMealFunc }) => {
   return (
     <Paper elevation={5}
       sx={{ padding: 1, marginBottom: 1, border: 1 }}>
-      <Typography variant="p" component="p" sx={{ opacity: 0.5 }}>
+      <Typography variant="body1" component="span" sx={{ opacity: 0.5 }}>
         {meal.mealTime}
       </Typography>
-      <Divider label="chip"><i>{meal.mealDate}</i></Divider>
+      <Divider>{meal.mealDate}</Divider>
 
-      <Typography variant="h5" component="p">
+      <Typography variant="h5" component="span">
         {meal.mealDescription}
       </Typography>
-      <Typography mb={2} textAlign={'right'} variant="p" component="p">
+      <Typography mb={2} textAlign={'right'} variant="subtitle1" component="h5">
         <strong>calories:</strong> {meal.mealCalories}
       </Typography>
       <Box sx={{ display: 'flex' }} gap={2} justifyContent={'end'}>

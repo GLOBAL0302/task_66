@@ -81,7 +81,8 @@ const AddMealForm = () => {
       }))
     }
 
-    console.log(userMeal)
+    console.log(date)
+
   };
 
   return (
