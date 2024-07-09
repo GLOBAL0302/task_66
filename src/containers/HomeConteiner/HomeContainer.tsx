@@ -40,6 +40,8 @@ const HomeContainer = () => {
     return acc + parseInt(meal.mealCalories);
   }, 0);
 
+
+
   return (
     <div style={{ background: 'white' }}>
       <Box padding={2}>

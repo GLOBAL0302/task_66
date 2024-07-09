@@ -11,7 +11,10 @@ interface Props {
 const Meals: React.FC<Props> = ({ meals, deleteMealFunc }) => {
   return (
     <Box mt={1} style={{overflow:'scroll', height:"70vh"}}>
-      {meals.map((meal) => (
+      {meals.sort((a, b)=>{
+        return new Date(a.mealDate) - new Date(b.mealDate)
+      })
+        .map((meal) => (
         <Meal key={meal.id} meal={meal} deleteMealFunc={deleteMealFunc}></Meal>
       ))}
     </Box>

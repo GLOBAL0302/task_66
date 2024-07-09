@@ -12,6 +12,7 @@ interface Props {
 const Meal: React.FC<Props> = ({ meal, deleteMealFunc }) => {
   const [isLoading, setLoading] = useState(false);
 
+
   const onClickDelete = async () => {
     setLoading(true);
     await deleteMealFunc(meal);
@@ -19,7 +20,7 @@ const Meal: React.FC<Props> = ({ meal, deleteMealFunc }) => {
   };
 
   return (
-    <Paper
+    <Paper elevation={5}
       sx={{ padding: 1, marginBottom: 1, border: 1 }}>
       <Typography variant="p" component="p" sx={{ opacity: 0.5 }}>
         {meal.mealTime}
